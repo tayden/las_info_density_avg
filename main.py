@@ -20,11 +20,11 @@ def extract_densities(file_path: Path) -> Optional[Tuple[float, float]]:
 
 def main(info_path: Path):
     densities = list(map(extract_densities, info_path.rglob('*.txt')))
-    avg_all_returns = sum([g[0] for g in densities])
-    avg_last_returns = sum([g[1] for g in densities])
+    avg_all_returns = sum([g[0] for g in densities]) / (len(densities) + 1e-10)
+    avg_last_returns = sum([g[1] for g in densities]) / (len(densities) + 1e-10)
 
-    print(f'ALL RETURNS AVG: {avg_all_returns} (per square meter)')
-    print(f'LAST RETURNS AVG: {avg_last_returns} (per square meter)')
+    print(f'ALL RETURNS AVG: {round(avg_all_returns, 2)} (per square meter)')
+    print(f'LAST RETURNS AVG: {round(avg_last_returns, 2)} (per square meter)')
 
 
 if __name__ == '__main__':
